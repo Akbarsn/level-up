@@ -3,6 +3,11 @@
 ## Description
 This repository contains base code for hybrid application called Level Up. This repository using Express JS for Back End Framework and Flutter for Front End Framework.
 
+## Feature
+- Managing task based on priority and deadline
+- Managing daily habit
+- Managing money
+
 # Back End
 
 ## Explanation
