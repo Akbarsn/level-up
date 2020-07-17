@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "dev",
+    "password": "123456",
+    "database": "dev-level_up",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "dev",
+    "password": "123456",
+    "database": "test-level_up",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "dev",
+    "password": "123456",
+    "database": "level_up",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
