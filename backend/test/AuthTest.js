@@ -1,8 +1,11 @@
 /* eslint-disable no-undef */
+require('dotenv').config()
+
 const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
 const model = require('../models')
+const PORT = process.env.PORT
 
 chai.use(chaiHttp)
 
@@ -21,7 +24,7 @@ describe('Register test', () => {
             password: '123456'
         }
 
-        chai.request('localhost:5000')
+        chai.request(`localhost:${PORT}`)
             .post('/register')
             .send(user)
             .end((err, res) => {
@@ -46,7 +49,7 @@ describe('Register test', () => {
             password: '123456'
         }
 
-        chai.request('localhost:5000')
+        chai.request(`localhost:${PORT}`)
             .post('/register')
             .send(user)
             .end((err, res) => {
@@ -68,7 +71,7 @@ describe('Login test', () => {
             password: '123456'
         }
 
-        chai.request('localhost:5000')
+        chai.rrequest(`localhost:${PORT}`)
             .post('/login')
             .send(user)
             .end((err, res) => {
@@ -89,7 +92,7 @@ describe('Login test', () => {
             password: '1234567'
         }
 
-        chai.request('localhost:5000')
+        chai.request(`localhost:${PORT}`)
             .post('/login')
             .send(user)
             .end((err, res) => {

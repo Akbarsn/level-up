@@ -1,13 +1,16 @@
 /* eslint-disable no-undef */
+require('dotenv').config()
+
 const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
+const PORT = process.env.PORT
 
 chai.use(chaiHttp)
 
 describe('Test Initiated', () => {
-    it('Should Return Pong Message', (done) => {
-        chai.request('localhost:5000')
+    it('Ping', (done) => {
+        chai.request(`localhost:${PORT}`)
             .get('/ping')
             .end((_err, res) => {
                 expect(res).to.have.status(200)
