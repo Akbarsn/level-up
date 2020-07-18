@@ -19,7 +19,7 @@ module.exports = {
 
             const { error, value } = schema.validate(req.body)
 
-            if (error === null) {
+            if (!error) {
                 // eslint-disable-next-line camelcase
                 const { full_name, email, username, password } = value
                 const hashedPassword = await bcrypt.hash(password, 12)
@@ -33,6 +33,7 @@ module.exports = {
                     throw new GeneralError('Hash failed')
                 }
             } else {
+                console.log(error.message)
                 throw new BadRequest('Data not valid')
             }
         } catch (error) {
@@ -45,40 +46,44 @@ module.exports = {
             password: joi.string().min(6).alphanum().required().not(null)
         })
 
-        const isValid = schema.validate(req.body)
-        if (isValid) {
-            const { username, password } = req.body
+        const { error, value } = schema.validate(req.body)
+        try {
+            if (!error) {
+                const { username, password } = value
 
-            const result = await model.User.findOne({
-                where: { username: username }
-            })
+                const result = await model.User.findOne({
+                    where: { username: username }
+                })
 
-            if (result !== null) {
-                const checkPass = await bcrypt.compare(password, result.password)
-                if (checkPass) {
-                    const payload = {
-                        id: result.id,
-                        name: result.full_name
-                    }
+                if (result !== null) {
+                    const checkPass = await bcrypt.compare(password, result.password)
+                    if (checkPass) {
+                        const payload = {
+                            id: result.id,
+                            name: result.full_name
+                        }
 
-                    const token = jwt.sign(payload, JWT_KEY)
-                    if (token) {
-                        res.status(200).json({
-                            status: 1,
-                            message: 'Login Successfully',
-                            data: { token: token }
-                        })
+                        const token = jwt.sign(payload, JWT_KEY)
+                        if (token) {
+                            res.status(200).json({
+                                status: 1,
+                                message: 'Login Successfully',
+                                data: { token: token }
+                            })
+                        } else {
+                            throw new GeneralError('Failed create token')
+                        }
                     } else {
-                        throw new GeneralError('Failed create token')
+                        throw new NotAcceptable('Wrong password')
                     }
                 } else {
-                    throw new NotAcceptable('Wrong password')
+                    throw new NotAcceptable('Can\'t find username')
                 }
             } else {
-                throw new NotAcceptable('Can\'t find username')
+                throw new BadRequest('Data not valid')
             }
-        } else {
-            throw new BadRequest('Data not valid')
+        } catch (error) {
+            next(error)
         }
     }
 }

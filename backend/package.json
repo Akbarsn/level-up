@@ -4,9 +4,10 @@
   "description": "Back End for Level Up Aplication",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "test": "npm run migrate && mocha",
     "dev": "nodemon",
-    "fix": "eslint ./controller ./middleware ./router ./test ./utils app.js --fix"
+    "fix": "eslint ./controller ./middleware ./router ./test ./utils ./seeders ./models ./migrations app.js --fix",
+    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
   },
   "author": "Akbarsn",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "helmet": "^3.23.3",
     "joi": "^17.1.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.3"
