@@ -9,8 +9,8 @@ module.exports = {
             email: 'personal.akbarsn@gmail.com',
             username: 'akbarsn',
             password: bcrypt.hashSync('123456', 12),
-            createdAt: moment().format(),
-            updatedAt: moment().format()
+            createdAt: moment().format('YYYY-MM-DD hh:mm:ss'),
+            updatedAt: moment().format('YYYY-MM-DD hh:mm:ss')
         }], {})
     },
 

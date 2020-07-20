@@ -28,6 +28,8 @@ module.exports = {
                     const query = await model.User.create({ full_name, email, username, password: hashedPassword })
                     if (query) {
                         res.status(200).json(query)
+                    } else {
+                        throw new GeneralError('Failed when creating User')
                     }
                 } else {
                     throw new GeneralError('Hash failed')

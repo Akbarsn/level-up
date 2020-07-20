@@ -71,7 +71,7 @@ describe('Login test', () => {
             password: '123456'
         }
 
-        chai.rrequest(`localhost:${PORT}`)
+        chai.request(`localhost:${PORT}`)
             .post('/login')
             .send(user)
             .end((err, res) => {
