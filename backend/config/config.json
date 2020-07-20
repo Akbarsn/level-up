@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "dev",
-    "password": "123456",
+    "username": "root",
+    "password": null,
     "database": "dev-level_up",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "test": {
-    "username": "dev",
-    "password": "123456",
+    "username": "root",
+    "password": null,
     "database": "test-level_up",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
-    "username": "dev",
-    "password": "123456",
+    "username": "root",
+    "password": null,
     "database": "level_up",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   }
 }
