@@ -9,19 +9,24 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             title: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: false
             },
             description: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                allowNull: true
             },
             priority: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
             due_date: {
-                type: Sequelize.DATE
+                type: Sequelize.DATE,
+                allowNull: true
             },
             belong_to: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: true
             },
             userId: {
                 type: Sequelize.INTEGER
