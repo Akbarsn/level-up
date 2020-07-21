@@ -12,7 +12,7 @@ class GeneralError extends Error {
             return 404
         }
         if (this instanceof NoToken) {
-            return 403
+            return 401
         }
         if (this instanceof NotAcceptable) {
             return 406
