@@ -4,7 +4,6 @@ require('dotenv').config()
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 
-const model = require('../models')
 const jwt = require('jsonwebtoken')
 const JWT_KEY = process.env.JWT_KEY
 const PORT = process.env.PORT
@@ -13,16 +12,10 @@ const expect = chai.expect
 chai.use(chaiHttp)
 
 describe('Get Homepage Data', () => {
-    it('Homepage OK', async (done) => {
-        const user = await model.User.findOne({
-            where: {
-                username: 'akbarsn'
-            }
-        })
-
+    it('Homepage OK', (done) => {
         const payload = {
-            id: user.id,
-            name: user.full_name
+            id: 1,
+            name: 'Akbar S N'
         }
 
         const token = jwt.sign(payload, JWT_KEY)
@@ -49,11 +42,11 @@ describe('Get Homepage Data', () => {
             })
     })
 
-    it('Homepage error 403', (done) => {
+    it('Homepage error 401', (done) => {
         chai.request(`localhost:${PORT}`)
             .get('/homepage')
             .end((err, res) => {
-                expect(res).to.have.status(403)
+                expect(res).to.have.status(401)
                 expect(res.body).to.have.property('message')
 
                 if (err) {
