@@ -6,7 +6,6 @@ const chaiHttp = require('chai-http')
 
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
-const { it } = require('mocha')
 const JWT_KEY = process.env.JWT_KEY
 const PORT = process.env.PORT
 
