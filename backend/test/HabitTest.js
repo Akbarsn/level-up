@@ -41,10 +41,8 @@ describe('Get All Habits', () => {
         chai.request(`localhost:${PORT}`)
             .get('/habit')
             .end((err, res) => {
-                expect(res).to.have.status(200)
-                expect(res.body).to.have.property('habits')
-
-                expect(res.body.habits).to.be.an('array')
+                expect(res).to.have.status(401)
+                expect(res.body).to.have.property('message')
 
                 if (err) {
                     done(err)
@@ -100,11 +98,8 @@ describe('Create a Habit', () => {
             .post('/habit')
             .send(habit)
             .end((err, res) => {
-                expect(res).to.have.status(200)
-                expect(res.body).to.have.property('id')
-                expect(res.body).to.have.property('title')
-                expect(res.body).to.have.property('description')
-                expect(res.body).to.have.property('type')
+                expect(res).to.have.status(401)
+                expect(res.body).to.have.property('message')
 
                 if (err) {
                     done(err)
@@ -132,11 +127,8 @@ describe('Create a Habit', () => {
             .send(habit)
             .set('authorization', `bearer ${token}`)
             .end((err, res) => {
-                expect(res).to.have.status(200)
-                expect(res.body).to.have.property('id')
-                expect(res.body).to.have.property('title')
-                expect(res.body).to.have.property('description')
-                expect(res.body).to.have.property('type')
+                expect(res).to.have.status(400)
+                expect(res.body).to.have.property('message')
 
                 if (err) {
                     done(err)
@@ -271,7 +263,6 @@ describe('Delete Habit', () => {
 
         chai.request(`localhost:${PORT}`)
             .delete('/habit/1')
-            .send(habit)
             .set('authorization', `bearer ${token}`)
             .end((err, res) => {
                 expect(res).to.have.status(200)
@@ -288,9 +279,8 @@ describe('Delete Habit', () => {
     it('Delete Habit 401', (done) => {
         chai.request(`localhost:${PORT}`)
             .delete('/habit/1')
-            .send(habit)
             .end((err, res) => {
-                expect(res).to.have.status(200)
+                expect(res).to.have.status(401)
                 expect(res.body).to.have.property('message')
 
                 if (err) {
@@ -311,10 +301,9 @@ describe('Delete Habit', () => {
 
         chai.request(`localhost:${PORT}`)
             .delete('/habit/2')
-            .send(habit)
             .set('authorization', `bearer ${token}`)
             .end((err, res) => {
-                expect(res).to.have.status(200)
+                expect(res).to.have.status(406)
                 expect(res.body).to.have.property('message')
 
                 if (err) {
