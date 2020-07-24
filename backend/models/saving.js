@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate (models) {
             // models.Saving.belongsTo(models.User, { foreignKeys: 'id', as: 'saving' })
+            models.Saving.hasOne(models.History, { foreignKey: 'id' })
         }
     };
     Saving.init({
