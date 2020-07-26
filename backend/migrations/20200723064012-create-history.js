@@ -22,7 +22,11 @@ module.exports = {
             },
             savingId: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: 'Savings',
+                    key: 'id'
+                }
             },
             createdAt: {
                 allowNull: false,
