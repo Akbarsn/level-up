@@ -4,19 +4,12 @@ require('dotenv').config()
 const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
-const model = require('../models')
 const PORT = process.env.PORT
 
 chai.use(chaiHttp)
 
 describe('Register test', () => {
-    before(() => {
-        model.User.destroy({
-            truncate: true
-        })
-    })
-
-    it('Should return 200 and user schema', (done) => {
+    it('Register OK', (done) => {
         const user = {
             full_name: 'Akbar Satya Nugraha',
             email: 'personal.akbarsn@gmail.com',
@@ -42,7 +35,7 @@ describe('Register test', () => {
             })
     })
 
-    it('Should error with status 400', (done) => {
+    it('Register 400', (done) => {
         const user = {
             full_name: 'Akbar Satya Nugraha',
             username: 'akbarsn',
@@ -65,7 +58,7 @@ describe('Register test', () => {
 })
 
 describe('Login test', () => {
-    it('Should get JWT token with status code 200', (done) => {
+    it('Login OK', (done) => {
         const user = {
             username: 'akbarsn',
             password: '123456'
@@ -86,7 +79,7 @@ describe('Login test', () => {
             })
     })
 
-    it('Should give 406 error', (done) => {
+    it('Login 406', (done) => {
         const user = {
             username: 'john',
             password: '1234567'
